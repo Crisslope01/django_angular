@@ -6,7 +6,7 @@ class Inmueble(models.Model):
     direccion = models.CharField(max_length=150)
     pais = models.CharField(max_length=150)
     descripcion = models.CharField(max_length=500)
-    imagen = models.ImageField(upload_to='inmuebles')
+    imagen = models.CharField(max_length=500)
     active = models.BooleanField(default=True)
     
     def __str__(self):
