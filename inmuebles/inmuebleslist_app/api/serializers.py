@@ -6,8 +6,9 @@ from inmuebleslist_app.models import Inmueble
 class InmuebleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Inmueble
-        #fields = '__all__'
-        fields = ('id', 'direccion', 'pais', 'imagen')
+        fields = '__all__'
+        #fields = ('id', 'direccion', 'pais', 'imagen')
+        #exclude = ['active']
         
     def validate(self, data):
         if data["direccion"] == data["pais"]:
