@@ -16,7 +16,7 @@ class Inmueble(models.Model):
     descripcion = models.CharField(max_length=500)
     imagen = models.CharField(max_length=500)
     active = models.BooleanField(default=True)
-    empresa = models.ForeignKey('Empresa', related_name='inmuebles', on_delete=models.CASCADE)
+    empresa = models.ForeignKey('Empresa', related_name='inmuebleslist', on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):

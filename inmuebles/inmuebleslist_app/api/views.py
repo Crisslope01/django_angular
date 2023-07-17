@@ -7,12 +7,11 @@ from rest_framework.views import APIView
 
 class EmpresaAV(APIView):
     def get(self, request):
-        Empresas = Empresa.objects.all()
-        serializer = EmpresaSerializer(Empresas, many=True)
+        empresas = Empresa.objects.all()
+        serializer = EmpresaSerializer(empresas, many=True, context={'request': request})
         return Response(serializer.data)
     
     def post(self, request):
-        #esto es para deserializar la data que viene en el request
         serializer = EmpresaSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()

@@ -1,14 +1,6 @@
 from rest_framework import serializers
 from inmuebleslist_app.models import Inmueble, Empresa
 
-
-class EmpresaSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Empresa
-        fields = '__all__'
-        
-    
-    
 class InmuebleSerializer(serializers.ModelSerializer):
 
     #longitud_direccion = serializers.SerializerMethodField()
@@ -19,9 +11,21 @@ class InmuebleSerializer(serializers.ModelSerializer):
         #fields = ('id', 'direccion', 'pais', 'imagen')
         #exclude = ['active']
         
+
+class EmpresaSerializer(serializers.ModelSerializer):
+    inmueblelist = serializers.HyperlinkedRelatedField(many=True, read_only=True,view_name='inmuebles_detail')
+    class Meta:
+        model = Empresa
+        fields = '__all__'
+        
+    
+    
+
      
     
-    
+    #inmuebleslist = InmuebleSerializer(many=True, read_only=True)
+    #inmuebleslist = serializers.StringRelatedField(many=True)
+    #inmueblelist = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
     
     
     
