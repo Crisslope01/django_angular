@@ -1,10 +1,27 @@
 from rest_framework.response import Response
-from inmuebleslist_app.models import Inmueble
-from inmuebleslist_app.api.serializers import InmuebleSerializer
+from inmuebleslist_app.models import Inmueble, Empresa
+from inmuebleslist_app.api.serializers import InmuebleSerializer, EmpresaSerializer
 #from rest_framework.decorators import api_view
 from rest_framework import status
 from rest_framework.views import APIView
 
+class EmpresaAV(APIView):
+    def get(self, request):
+        Empresas = Empresa.objects.all()
+        serializer = EmpresaSerializer(Empresas, many=True)
+        return Response(serializer.data)
+    
+    def post(self, request):
+        #esto es para deserializar la data que viene en el request
+        serializer = EmpresaSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    
+        
 
 class InmueblelistAV(APIView):
     
@@ -20,7 +37,6 @@ class InmueblelistAV(APIView):
             return Response(serializer.data)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
     
 
 class InmuebleDetailAV(APIView):
